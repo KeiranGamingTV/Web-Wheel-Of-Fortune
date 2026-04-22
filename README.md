@@ -8,13 +8,16 @@
   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
 </p>
 <p align="center">
-  <a href="bitcoin:A_BITCOIN_ADDRESS">
-    <img src="https://img.shields.io/badge/Bitcoin (Direct Link)-000000?style=for-the-badge&logo=bitcoin&logoColor=white" height=35/>
-  </a>
-  <a href="">
+  <a href="https://github.com/KeiranGamingTV/MyCryptoDonations/blob/main/addresses.md">
     <img src="https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" height=35/>
   </a>
-  <a href="">
+  <a href="https://github.com/KeiranGamingTV/MyCryptoDonations/blob/main/addresses.md">
+    <img src="https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white" height=35/>
+  </a>
+  <a href="https://github.com/KeiranGamingTV/MyCryptoDonations/blob/main/addresses.md">
+    <img src="https://img.shields.io/badge/Solana-000?style=for-the-badge&logo=Solana&logoColor=9945FF" height=35/>
+  </a>
+  <a href="https://github.com/KeiranGamingTV/MyCryptoDonations/blob/main/addresses.md">
     <img src="https://img.shields.io/badge/monero-FF6600?style=for-the-badge&logo=monero&logoColor=white" height=35/>
   </a>
 </p>
