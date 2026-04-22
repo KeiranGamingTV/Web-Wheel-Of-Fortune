@@ -1,7 +1,26 @@
 # Wheel of Fortune Web Game
-Welcome to my Wheel of Fortune web game! Built entirely with HTML, CSS, and JavaScript, this project brings the classic game show mechanics directly to your browser, no download required. You can play solo or challenge your friends in local multiplayer.
+<p align="center">
+  <a href="https://github.com/KeiranGamingTV/Web-Wheel-Of-Fortune?tab=MIT-1-ov-file#">
+    <img src="https://img.shields.io/badge/MIT_LICENSE-green?style=for-the-badge"/>
+  </a>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
+</p>
+<p align="center">
+  <a href="https://github.com/sponsors/KeiranGamingTV">
+    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white" width=150/>
+  </a>
+</p>
+Hey there, you found my Wheel of Fortune web game! Built entirely with HTML, CSS, and JavaScript, this project brings the classic game show mechanics directly to your browser, no download required. You can play solo or challenge your friends in local multiplayer.  
+<br/>
+<br/>
+
+
 > [!NOTE]
 > Also, I really struggle with writing READMEs, so I had a little help from AI for this README. All of the code is 100% written by me.
+<br/>
+
 # 🎮 Features
 - **Local Multiplayer:** Pass-and-play support for 1 to 3 players.
 - **Interactive Wheel:** A fully animated, physics-based wheel featuring randomized cash wedges, "Bankrupt," and "Lose a Turn" segments.
@@ -10,6 +29,8 @@ Welcome to my Wheel of Fortune web game! Built entirely with HTML, CSS, and Java
 - **Extensive Category Library:** The game pulls randomly from 49 classic show categories, with all puzzles being from real episodes.
 > [!WARNING]
 > Disclaimer: All concepts, designs, trademarks, and logos are the property of **_Sony Pictures Television Inc._** and **_Califon Productions, Inc._** This project is a fan-made creation intended strictly for educational and personal entertainment purposes.
+<br/>
+
 # 📂 Puzzle Categories
 The game includes a massive library of puzzles organized into the following 49 categories:
 | Category | # of Puzzles | Added? |
@@ -63,6 +84,7 @@ The game includes a massive library of puzzles organized into the following 49 c
 | TV Show Title | 602 | ❌ No |
 | What Are You Doing? | 7,115 | ❌ No |
 | What Are You Wearing? | 187 | ✅ Yes |
+<br/>
 
 # 🚀 How to Play
 Because this project is built with standard front-end technologies, no complex server setup or build process is required.
@@ -73,18 +95,36 @@ Because this project is built with standard front-end technologies, no complex s
 - Spin the Wheel: Click to spin. If you land on a cash value, guess a consonant using the on-screen keyboard. Correct guesses multiply the wedge value by the number of letter occurrences and add the total to your bank.
 - Buy a Vowel: If you have at least $250 in your bank, you can purchase a vowel (A, E, I, O, U).
 - Solve: When you are ready to guess the phrase, click "Solve." You must type your answer and submit it before the 20-second timer runs out!
+<br/>
+
 # 📝 Changelog
-## Version 1.0_04.22.2026
-- Initial release featuring the core game loop (Spin, Guess, Buy Vowel, Solve).
-- Added local 1-3 player state management.
-- Integrated wheel physics and animations.
-- Included 49 puzzle category scripts.
-- Implemented a responsive, neon-styled UI with a hidden credits modal.
+- **Version 1.0_04.22.2026**
+  - Initial release featuring the core game loop (Spin, Guess, Buy Vowel, Solve).
+  - Added local 1-3 player state management.
+  - Integrated wheel physics and animations.
+  - Included 49 puzzle category scripts.
+  - Implemented a responsive, neon-styled UI with a hidden credits modal.
+<br/>
+
 # 🐛 Bugs, Issues, and Contributions
 ## Reporting Issues
 If you encounter a bug—such as a typo in a puzzle, a wheel glitch, or a UI issue—or if you have a feature request, please open an issue in the Issues tab.
 When submitting, it helps to include:
 - A clear description of the issue or idea.
 - Steps to reproduce the bug (if applicable).
+<br/>
+
 # Contributing
 Contributions are highly encouraged! Whether you want to optimize the code, improve the CSS animations, or add new puzzle categories to the `/categories` folder, feel free to fork the repository and submit a Pull Request.
+# Donating
+<p>
+  <a href="bitcoin:A_BITCOIN_ADDRESS">
+    <img src="https://img.shields.io/badge/Bitcoin (Direct Link)-000000?style=for-the-badge&logo=bitcoin&logoColor=white" height=40/>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" height=40/>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/monero-FF6600?style=for-the-badge&logo=monero&logoColor=white" height=40/>
+  </a>
+</p>
