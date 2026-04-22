@@ -8,15 +8,19 @@
   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
 </p>
 <p align="center">
-  <a href="https://github.com/sponsors/KeiranGamingTV">
-    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white" width=150/>
+  <a href="bitcoin:A_BITCOIN_ADDRESS">
+    <img src="https://img.shields.io/badge/Bitcoin (Direct Link)-000000?style=for-the-badge&logo=bitcoin&logoColor=white" height=35/>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" height=35/>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/monero-FF6600?style=for-the-badge&logo=monero&logoColor=white" height=35/>
   </a>
 </p>
-Hey there, you found my Wheel of Fortune web game! Built entirely with HTML, CSS, and JavaScript, this project brings the classic game show mechanics directly to your browser, no download required. You can play solo or challenge your friends in local multiplayer.  
-<br/>
-<br/>
 
-
+Hey there, you found my Wheel of Fortune web game! Built entirely with HTML, CSS, and JavaScript, this project brings the classic game show mechanics directly to your browser, no download required. You can play solo or challenge your friends in local multiplayer.
+<br/>
 > [!NOTE]
 > Also, I really struggle with writing READMEs, so I had a little help from AI for this README. All of the code is 100% written by me.
 <br/>
@@ -116,15 +120,3 @@ When submitting, it helps to include:
 
 # Contributing
 Contributions are highly encouraged! Whether you want to optimize the code, improve the CSS animations, or add new puzzle categories to the `/categories` folder, feel free to fork the repository and submit a Pull Request.
-# Donating
-<p>
-  <a href="bitcoin:A_BITCOIN_ADDRESS">
-    <img src="https://img.shields.io/badge/Bitcoin (Direct Link)-000000?style=for-the-badge&logo=bitcoin&logoColor=white" height=40/>
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" height=40/>
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/badge/monero-FF6600?style=for-the-badge&logo=monero&logoColor=white" height=40/>
-  </a>
-</p>
