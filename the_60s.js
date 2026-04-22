@@ -1,0 +1,10 @@
+const the_60sData = {
+    category: "THE 60'S",
+    puzzles: [
+        "GO-GO BOOTS & MINISKIRTS",
+        "LYNDON JOHNSON RE-ELECTED AS PRESIDENT",
+        "MEDICARE PROVIDES AID TO THE ELDERLY",
+        "NATIONAL ORGANIZATION FOR WOMEN FOUNDED",
+        "SOVIETS ERECT BERLIN WALL"
+    ]
+};

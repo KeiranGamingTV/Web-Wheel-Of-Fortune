@@ -1,0 +1,30 @@
+const megawordData = {
+    category: "MEGAWORD",
+    puzzles: [
+        "AMBIVALENCE",
+        "APERITIF",
+        "CHRYSANTHEMUM",
+        "CIRCUMFERENCE",
+        "COGNIZANT",
+        "COMMENDATION",
+        "CONTORTIONIST",
+        "COPACETIC",
+        "ELASTICIZED",
+        "ENTREPRENEUR",
+        "EROTICISM",
+        "EXTEMPORIZE",
+        "HYPOTHESIS",
+        "HYPOTHETICAL",
+        "JUXTAPOSITION",
+        "LABYRINTH",
+        "MELODRAMATIC",
+        "PATERNALISTIC",
+        "PHANTASMAGORIA",
+        "PROLIFERATION",
+        "REJUVENATED",
+        "STUPEFIED",
+        "SYNCOPATED",
+        "VACILLATING",
+        "WITTICISM"
+    ]
+};
