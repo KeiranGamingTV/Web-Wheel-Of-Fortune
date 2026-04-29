@@ -31,6 +31,7 @@ let solveTimer = null;
 let isSolving = false;
 let solveTiles = []; 
 let currentSolveIndex = 0;
+let hasAlertedNoVowels = false;
 
 // DOM Elements
 const wheelImg = document.getElementById('fortune-wheel');
@@ -43,6 +44,7 @@ function showPlayerSelection() {
 }
 
 function startGame(count) {
+    fadeOutMenuMusic();
     numPlayers = count;
     playerBanks = [0, 0, 0];
     currentPlayer = 0;
@@ -52,11 +54,7 @@ function startGame(count) {
     
     for(let i = 1; i <= 3; i++) {
         const display = document.getElementById(`p${i}-display`);
-        if (i <= numPlayers) {
-            display.classList.remove('hidden');
-        } else {
-            display.classList.add('hidden');
-        }
+        display.classList.toggle('hidden', i > numPlayers);
     }
     
     init();
@@ -65,10 +63,15 @@ function startGame(count) {
 function init() {
     currentWheelRotation = 0;
     isVowelMode = false;
+    hasAlertedNoVowels = false;
     
     const data = allCategories[Math.floor(Math.random() * allCategories.length)];
     document.getElementById('category-text').innerText = data.category;
     currentPuzzle = data.puzzles[Math.floor(Math.random() * data.puzzles.length)].toUpperCase();
+
+    const revealSnd = document.getElementById('snd-reveal');
+    revealSnd.currentTime = 0;
+    revealSnd.play().catch(() => {});
     
     wheelImg.style.transition = 'none';
     wheelImg.style.transform = 'rotate(0deg)';
@@ -232,7 +235,7 @@ function checkVowelsRemaining() {
     return Array.from(hiddenTiles).some(tile => vowels.includes(tile.dataset.letter));
 }
 
-function handleGuess(letter) {
+async function handleGuess(letter) {
     if (isSolving) {
         handleSolveLetter(letter);
         return;
@@ -242,22 +245,44 @@ function handleGuess(letter) {
     btn.disabled = true;
     btn.classList.add('used'); 
     
-    const targets = document.querySelectorAll(`.tile[data-letter='${letter}']`);
+    let targets = Array.from(document.querySelectorAll(`.tile[data-letter='${letter}']`));
     
     if (targets.length > 0) {
-        const dingSnd = document.getElementById('snd-ding');
-        dingSnd.currentTime = 0;
-        dingSnd.play().catch(() => {});
-
-        targets.forEach(t => { 
-            t.classList.remove('hidden-letter'); 
-            t.innerText = letter; 
+        // Sort tiles by ID index (top-left to bottom-right)
+        targets.sort((a, b) => {
+            const indexA = parseInt(a.id.split('-')[1]);
+            const indexB = parseInt(b.id.split('-')[1]);
+            return indexA - indexB;
         });
 
-        if (!isVowelMode) playerBanks[currentPlayer] += (currentSpinValue * targets.length);
+        togglePhase('revealLetter');
+        
+        // Reveal tiles one by one
+        for (const t of targets) {
+            // 1. Turn the spot blue
+            t.classList.add('revealing');
+            
+            // 2. Play the ding sound
+            const dingSnd = document.getElementById('snd-ding');
+            dingSnd.currentTime = 0;
+            dingSnd.play().catch(() => {});
 
-        if (!checkVowelsRemaining()) {
+            // 3. Wait 0.75 seconds
+            await new Promise(resolve => setTimeout(resolve, 750));
+
+            // 4. Reveal the letter and make it white
+            t.classList.remove('revealing', 'hidden-letter'); 
+            t.innerText = letter; 
+        }
+
+        // Apply scoring after all letters are revealed
+        if (!isVowelMode) {
+            playerBanks[currentPlayer] += (currentSpinValue * targets.length);
+        }
+        
+        if (!hasAlertedNoVowels && !checkVowelsRemaining()) {
             alert("THERE ARE NO MORE VOWELS IN THE PUZZLE.");
+            hasAlertedNoVowels = true; // Mark as alerted so it doesn't fire again
         }
     } else {
         const wrongSnd = document.getElementById('snd-wrong');
@@ -316,8 +341,10 @@ document.getElementById('spin-trigger').addEventListener('click', () => {
             currentWheelRotation += constantSpeed * Math.pow(remaining, 2);
             wheelImg.style.transform = `rotate(${currentWheelRotation}deg)`;
 
-            // Check if wheel has rotated past a 15-degree segment (360 / 24 segments)
-            if (Math.floor(currentWheelRotation / 15) > Math.floor(lastClickRotation / 15)) {
+            const currentStep = Math.floor((currentWheelRotation + 7.5) / 15);
+            const lastStep = Math.floor((lastClickRotation + 7.5) / 15);
+
+            if (currentStep > lastStep) {
                 clickSnd.currentTime = 0;
                 clickSnd.play().catch(() => {});
                 lastClickRotation = currentWheelRotation;
@@ -347,12 +374,43 @@ function finalizeSpin() {
         if (typeof currentSpinValue === 'number') {
             togglePhase('keyboard', `GUESS A CONSONANT (${displayValue})`);
         } else {
-            if (currentSpinValue === "BANKRUPT") playerBanks[currentPlayer] = 0;
-            alert(currentSpinValue);
-            currentPlayer = (currentPlayer + 1) % numPlayers;
-            togglePhase('menu');
+            if (currentSpinValue === "BANKRUPT") {
+                playerBanks[currentPlayer] = 0;
+                triggerSpecialEffect('bankrupt');
+            } else if (currentSpinValue === "LOSE A TURN") {
+                triggerSpecialEffect('loseaturn');
+            } else {
+                // Fallback for any other non-numeric wedges
+                alert(currentSpinValue);
+                currentPlayer = (currentPlayer + 1) % numPlayers;
+                togglePhase('menu');
+            }
         }
     }, 1500);
+}
+
+function triggerSpecialEffect(type) {
+    const overlay = document.getElementById(`${type}-overlay`);
+    
+    // Play sound only for Bankrupt
+    if (type === 'bankrupt') {
+        const bankruptSnd = document.getElementById('snd-bankrupt');
+        bankruptSnd.currentTime = 0;
+        bankruptSnd.play().catch(() => {});
+    }
+
+    // Show and animate the image
+    overlay.classList.remove('hidden');
+    overlay.classList.add('zoom-effect');
+
+    // Wait for the animation to finish (approx 3.6s) before moving to next player
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('zoom-effect');
+        
+        currentPlayer = (currentPlayer + 1) % numPlayers;
+        togglePhase('menu');
+    }, 3600);
 }
 
 /* Solve & Vowel Actions */
@@ -363,6 +421,10 @@ function startSolveAttempt() {
     
     if (solveTiles.length === 0) return;
 
+    const solveMusic = document.getElementById('snd-solve-music');
+    solveMusic.currentTime = 0;
+    solveMusic.play().catch(() => {});
+    
     togglePhase('solve');
     highlightCurrentSolveTile();
 
@@ -379,18 +441,32 @@ function startSolveAttempt() {
 
 function checkSolve() {
     clearInterval(solveTimer);
+
+    const solveMusic = document.getElementById('snd-solve-music');
+    solveMusic.pause();
+    
     let isCorrect = solveTiles.every(tile => tile.innerText === tile.dataset.letter);
 
     if (isCorrect) {
+        const winSnd = document.getElementById('snd-win');
+        winSnd.currentTime = 0;
+        winSnd.play().catch(() => {});
+        
         alert(`PLAYER ${currentPlayer + 1} SOLVED IT!`);
         togglePhase('win');
     } else {
         failSolve("INCORRECT!");
+        const wrongSnd = document.getElementById('snd-wrong');
+        wrongSnd.currentTime = 0;
+        wrongSnd.play().catch(() => {});
     }
     isSolving = false;
 }
 
 function failSolve(msg) {
+    const solveMusic = document.getElementById('snd-solve-music');
+    solveMusic.pause();
+    
     alert(msg);
     clearInterval(solveTimer);
     isSolving = false;
@@ -426,7 +502,9 @@ function togglePhase(phase, msg = "") {
         }
     });
 
-    if (phase === 'menu') {
+    if (phase === 'revealLetter') {
+        document.getElementById('action-menu').classList.add('hidden');
+    } else if 
         document.getElementById('action-menu').classList.remove('hidden');
         updateUI();
     } else if (phase === 'solve') {
@@ -463,6 +541,32 @@ function togglePhase(phase, msg = "") {
         document.getElementById('play-again-btn').classList.remove('hidden');
         updateUI();
     }
+}
+
+window.onload = () => {
+    const menuSnd = document.getElementById('snd-menu');
+    // Attempt autoplay; most browsers will block this until the first click
+    menuSnd.play().catch(() => {
+        console.log("Autoplay blocked. Music will start on first user interaction.");
+        window.addEventListener('mousedown', () => {
+            if (menuSnd.paused) menuSnd.play();
+        }, { once: true });
+    });
+};
+
+function fadeOutMenuMusic() {
+    const menuSnd = document.getElementById('snd-menu');
+    let volume = 1.0;
+    const fadeInterval = setInterval(() => {
+        if (volume > 0.05) {
+            volume -= 0.05;
+            menuSnd.volume = volume;
+        } else {
+            clearInterval(fadeInterval);
+            menuSnd.pause();
+            menuSnd.volume = 1.0;
+        }
+    }, 50);
 }
 
 /* Credits Modal Logic */
