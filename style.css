@@ -424,7 +424,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 3000;
-    width: 600px; /* Adjust size as needed */
+    width: 600px;
     pointer-events: none;
 }
 
