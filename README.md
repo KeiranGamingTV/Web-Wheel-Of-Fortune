@@ -125,7 +125,11 @@ Because this project is built with standard front-end technologies, no complex s
 <br/>
 
 # 📝 Changelog
-## - 🆕 **Version 1.0_04.28.2026_2**
+## - 🔨 **Version 1.0_04.28.2026_3**
+  - Bug fix build
+    - Website overall was being iffy, so replaced all uploaded code with my local code that I know works.
+
+## - **Version 1.0_04.28.2026_2**
   - Added sound effects and music.
   - Added animation to logo.
   - Added visual effects for "BANKRUPT" and "LOSE A TURN".
